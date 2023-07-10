@@ -1,6 +1,6 @@
 "use client";
 
-import LoginPage from "../../auth/pages/LoginPage";
+import LoginPage from "./pages/LoginPage";
 import { useRouter } from "next/navigation";
 
 export default function Page() {

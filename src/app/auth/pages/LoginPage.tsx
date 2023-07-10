@@ -3,11 +3,11 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { LoginPageProps } from "../types";
 import authService from "../services/authService";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const LoginPage = (props: LoginPageProps) => {
   const { success, beforeSending } = props;
@@ -45,7 +45,7 @@ const LoginPage = (props: LoginPageProps) => {
           </Box>
         </CardContent>
         <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button
+          <LoadingButton
             variant="contained"
             color="primary"
             onClick={() => {
@@ -54,8 +54,8 @@ const LoginPage = (props: LoginPageProps) => {
               props.success?.();
             }}
           >
-            Go
-          </Button>
+            <span>Send</span>
+          </LoadingButton>
         </CardActions>
       </Card>
     </Container>

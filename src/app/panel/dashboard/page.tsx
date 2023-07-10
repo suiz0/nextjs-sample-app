@@ -1,8 +1,8 @@
 "use client";
 
-import authService from "@/auth/services/authService";
+import authService from "@/app/auth/services/authService";
 import { useRouter } from "next/navigation";
-import ProtectedRoute from "@/auth/components/ProtectedRoute";
+import ProtectedRoute from "@/app/auth/components/ProtectedRoute";
 import Image from "next/image";
 import styles from "./page.module.css";
 

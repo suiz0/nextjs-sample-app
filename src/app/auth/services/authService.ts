@@ -1,4 +1,4 @@
-import { isBrowser } from "../../utils";
+import { isBrowser } from "../../../utils";
 
 const readJWT = (): string | null => {
   if (isBrowser()) {
