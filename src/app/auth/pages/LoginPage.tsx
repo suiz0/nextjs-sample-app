@@ -5,12 +5,18 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import { LoginPageProps } from "../types";
-import authService from "../services/authService";
+import { LoginPageProps, UserData } from "../types";
 import LoadingButton from "@mui/lab/LoadingButton";
+import SendIcon from "@mui/icons-material/Send";
+import { useState } from "react";
 
 const LoginPage = (props: LoginPageProps) => {
-  const { success, beforeSending } = props;
+  const { success, beforeSending, login } = props;
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState<UserData>({
+    username: "admin",
+    password: "password",
+  });
   return (
     <Container
       sx={{
@@ -33,14 +39,16 @@ const LoginPage = (props: LoginPageProps) => {
               fullWidth
               id="outlined-required"
               label="Username"
-              value="admin"
+              value={user.username}
+              onChange={(ev) => setUser({ ...user, username: ev.target.value })}
             />
             <TextField
               id="outlined-disabled"
               type="password"
               fullWidth
               label="Password"
-              value="enter"
+              value={user.password}
+              onChange={(ev) => setUser({ ...user, password: ev.target.value })}
             />
           </Box>
         </CardContent>
@@ -48,10 +56,13 @@ const LoginPage = (props: LoginPageProps) => {
           <LoadingButton
             variant="contained"
             color="primary"
+            loading={isLoading}
+            loadingPosition="end"
+            endIcon={<SendIcon />}
             onClick={() => {
+              setIsLoading(true);
               props.beforeSending?.();
-              authService.login();
-              props.success?.();
+              props.login(user).catch(() => setIsLoading(false));
             }}
           >
             <span>Send</span>

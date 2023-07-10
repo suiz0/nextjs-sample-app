@@ -1,4 +1,6 @@
+import { AxiosInstance } from "axios";
 import { isBrowser } from "../../../utils";
+import { UserData } from "../types";
 
 const readJWT = (): string | null => {
   if (isBrowser()) {
@@ -8,10 +10,12 @@ const readJWT = (): string | null => {
   return null;
 };
 
-const login = () => {
-  if (isBrowser()) {
-    return window.localStorage.setItem("auth.token", "test");
-  }
+const login = (apiClient: AxiosInstance, user: UserData) => {
+  //if (isBrowser()) {
+  return apiClient.post("/auth/login", user).then(() => {
+    window.localStorage.setItem("auth.token", "test");
+  });
+  //}
 };
 
 const logout = () => {
