@@ -62,7 +62,10 @@ const LoginPage = (props: LoginPageProps) => {
             onClick={() => {
               setIsLoading(true);
               props.beforeSending?.();
-              props.login(user).catch(() => setIsLoading(false));
+              props
+                .login(user)
+                .then(props.success)
+                .catch(() => setIsLoading(false));
             }}
           >
             <span>Send</span>

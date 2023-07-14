@@ -12,8 +12,8 @@ const readJWT = (): string | null => {
 
 const login = (apiClient: AxiosInstance, user: UserData) => {
   //if (isBrowser()) {
-  return apiClient.post("/auth/login", user).then(() => {
-    window.localStorage.setItem("auth.token", "test");
+  return apiClient.post("/auth/login", user).then((response) => {
+    window.localStorage.setItem("auth.token", response.data.access_token);
   });
   //}
 };
